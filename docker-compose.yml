@@ -1,0 +1,43 @@
+# Run both services:  docker compose up --build
+# UI:  http://localhost:8501     API:  http://localhost:8000/health
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    env_file: .env                      # NVIDIA key, model IDs, prices, APP_API_KEY (never baked into the image)
+    ports:
+      - "127.0.0.1:8000:8000"           # reachable from this machine only
+    volumes:
+      - ./routers/laya_checkpoint:/app/routers/laya_checkpoint:ro   # 808 MB model, mounted read-only
+      - ./logs:/app/logs                # audit log + budget counters (the only writable place)
+    read_only: true                     # container filesystem is read-only...
+    tmpfs:
+      - /tmp                            # ...except a scratch dir for caches
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    environment:
+      API_URL: http://api:8000          # talks to the API over the private compose network
+      APP_API_KEY: ${APP_API_KEY}       # only these secrets are passed to the UI (not the NVIDIA key)
+      UI_PASSWORD: ${UI_PASSWORD:-}
+    ports:
+      - "127.0.0.1:8501:8501"
+    volumes:
+      - ./results:/app/results:ro       # dashboard reads the evaluation outputs
+      - ./data:/app/data:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /home/appuser/.streamlit
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

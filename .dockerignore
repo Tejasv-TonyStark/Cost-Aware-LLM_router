@@ -1,0 +1,23 @@
+# Never send secrets into the build context (both files may hold real keys)
+.env
+.env.*
+
+# Local environment and caches
+venv/
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.git/
+.vscode/
+.ipynb_checkpoints/
+
+# Large or mounted-at-runtime files
+routers/laya_checkpoint/
+laya_checkpoint.zip
+results/
+data/
+notebooks/
+
+# Audit logs (runtime data, mounted into the API container)
+logs/
