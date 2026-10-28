@@ -1,0 +1,20 @@
+[theme]
+base = "dark"
+primaryColor = "#8b5cf6"
+backgroundColor = "#0b0a1a"
+secondaryBackgroundColor = "#17152e"
+textColor = "#ece9ff"
+font = "sans serif"
+borderColor = "#2a2650"
+baseRadius = "0.7rem"
+showWidgetBorder = true
+
+[client]
+toolbarMode = "minimal"      # hide developer menu items
+showErrorDetails = false     # never show stack traces to visitors
+
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
