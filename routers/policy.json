@@ -1,0 +1,5 @@
+{
+  "variant": "laya_finetuned",
+  "threshold": 0.4,
+  "cost_weight": 0.2
+}

@@ -1,0 +1,27 @@
+{
+  "tiers": [
+    "small",
+    "large"
+  ],
+  "weights": [
+    2,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "thresholds": [
+    3.809166666666666
+  ],
+  "features": [
+    "words",
+    "numbers",
+    "math",
+    "reasoning",
+    "multistep",
+    "short_fact",
+    "multiple_choice"
+  ]
+}
