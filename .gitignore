@@ -1,0 +1,26 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Notebooks / editors
+.ipynb_checkpoints/
+.vscode/
+
+# Big or regenerable files
+data/*.jsonl
+results/raw_*.jsonl
+*.ckpt
+*.safetensors
+
+# Laya fine-tuned checkpoint (large; produced by the Colab notebook)
+routers/laya_checkpoint/
+
+laya_checkpoint.zip
+
+# Audit logs (runtime data)
+logs/
